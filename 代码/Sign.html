@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>智能社区健康管理</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/Sign.css">
+  </head>
+  <body>
+    <iframe src="background.html" frameborder="0" width="100%" height="100%" style="z-index: -1;width: 100%;position: fixed;"></iframe>
+    <div id="home">
+      <h1 style="color: white;">社区健康管理系统</h1>
+      <div id="home_main">
+      <form id="home_form">
+        <div class="form-group">
+          <label for="exampleInputEmail1">用户名</label>
+          <input type="text" id="username" class="form-control" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">密码</label>
+          <input type="password" id="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group">
+        <label class="radio-inline">
+        <input type="radio" name="id" id="user" value="user" checked=""> 用户
+        </label>
+        <label class="radio-inline">
+        <input type="radio" name="id" id="manager" value="manager"> 管理员
+        </label>
+        </div>
+      </form>
+        <button type="submit" id="sign_btn" class="btn btn-success btn-block">登录</button>
+        <hr>
+        <button type="button" id="register_btn" class="btn btn-default btn-block">用户注册</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+    <script src="js/Sign.js"></script>
+  </body>
+</html>

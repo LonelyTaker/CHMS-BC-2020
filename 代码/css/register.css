@@ -1,0 +1,10 @@
+#register_main{
+    position:relative;
+    top:70px;
+    width: 450px;
+    height: 810px;
+    margin:0 auto;
+    padding: 25px;
+    background-color: white;
+    border-radius: 15px;
+}

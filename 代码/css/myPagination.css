@@ -1,0 +1,50 @@
+*{
+	box-sizing: border-box;
+}
+h1{
+	margin: 0 auto;
+	width: 90%;
+	text-align: center;
+}
+#testTable{
+	margin: 0 auto;
+	width: 90%;
+	border: solid 1px black;
+	border-collapse: collapse;
+} 
+.id{
+	width: 15%;
+	border: solid 1px black; 
+}
+.name{
+	width: 10%;
+	border: solid 1px black; 
+} 
+.sex{
+	width: 5%;
+	border: solid 1px black;
+}
+.position{
+	width: 15%;
+	border: solid 1px black;
+}
+.direction{
+	width: 15%;
+	border: solid 1px black;
+}
+.phone{
+	width: 15%;
+	border: solid 1px black;
+}
+
+.operation{
+	width: 15%;
+	border: solid 1px black;
+}
+th{
+	background-color: #C0C0C0;
+}
+
+.testRow:hover{
+	background-color: yellow;
+}

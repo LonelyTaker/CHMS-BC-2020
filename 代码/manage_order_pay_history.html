@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>智能社区健康管理系统-生活服务</title>
+  <link rel="stylesheet" href="css/layui.css">
+  <link rel="stylesheet" href="css/data.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">智能社区健康管理系统</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item "><a href="announce.php">公告</a></li>
+      <li class="layui-nav-item"><a href="index.html">健康数据</a></li>
+      <li class="layui-nav-item"><a href="assess_status.html">智能健康评估</a></li>
+      <li class="layui-nav-item layui-this"><a href="manage_advice.html">健康生活服务</a></li>
+    </ul>
+
+    <ul class="layui-nav layui-layout-right">
+      <li id="user" class="layui-nav-item">
+        <a href="javascript:;">
+          测试数据
+        </a>
+      </li>
+      <li class="layui-nav-item">
+        <a href="javascript:void(0);" onclick="logout()">
+          退出登录
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+
+        <li class="layui-nav-item"><a href="manage_advice.html">个性化方案</a></li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a class="" href="javascript:;">订餐服务</a>
+          <dl class="layui-nav-child">
+            <dd><a href="manage_order_menu.html">菜单</a></dd>
+            <dd><a href="manage_order_pay.html">下单</a></dd>
+            <dd class="layui-this"><a href="manage_order_pay_history.html">订单查询</a></dd>
+          </dl>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+      <ul id="main" class="layui-timeline">
+
+      <!-- <li class="layui-timeline-item">
+        <i class="layui-icon layui-timeline-axis">&#927;</i>
+        <div class="layui-timeline-content layui-text">
+          <h3 class="layui-timeline-title">5月17日</h3>
+          <div><span>双花煲枸杞籽</span>&#160;&#160;&#160;<span class="price_histry">￥36</span></div><br>
+          <div><span>金银花炖鸡汤</span>&#160;&#160;&#160;<span class="price_histry">￥60</span></div><br>
+          <div><span>豉油蛋</span>&#160;&#160;&#160;<span class="price_histry">￥10</span></div><br>
+         <div><span>元气蔬菜汤</span>&#160;&#160;&#160;<span class="price_histry">￥57</span></div><br>
+        </div>
+      </li> -->
+
+      </ul>  
+    </div>
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    © myhealth.com - 智能社区健康管理系统
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script src="js/initialization.js"></script>
+<script>
+  function useritem(){
+      window.location.href="information.html";
+    }
+  $.ajax({
+  url: 'php/order_history.php',
+  type: 'POST',
+  contentType: false,
+  processData: false,
+  success: function(json){
+    var data=JSON.parse(json);
+    $('#main').empty();
+    $.each(data,function(){
+      if (this.food!='') {
+        str=''
+        str=str+'<li class="layui-timeline-item">';
+        str=str+'<i class="layui-icon layui-timeline-axis">&#927;</i>';
+        str=str+'<div class="layui-timeline-content layui-text">';
+        str=str+'<h3 class="layui-timeline-title">'+this.date+'</h3>';
+        var food=this.food;
+        $.each(food,function(){
+          str=str+'<div><span>'+this.fname+'</span>&#160;&#160;&#160;<span class="price_histry">￥'+this.fprice+'</span></div><br>';
+        });
+        str=str+'</div></li>';
+        $('#main').append(str);
+      }
+    });
+  },
+  error: function(){
+    alert("error");
+  }
+  });
+</script>
+</body>
+</html>

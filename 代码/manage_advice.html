@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>智能社区健康管理系统-生活服务</title>
+  <link rel="stylesheet" href="css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">智能社区健康管理系统</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item "><a href="announce.php">公告</a></li>
+      <li class="layui-nav-item"><a href="index.html">健康数据</a></li>
+      <li class="layui-nav-item"><a href="assess_status.html">智能健康评估</a></li>
+      <li class="layui-nav-item layui-this"><a href="manage_advice.html">健康生活服务</a></li>
+    </ul>
+
+    <ul class="layui-nav layui-layout-right">
+      <li id="user" class="layui-nav-item">
+        <a href="javascript:;">
+          测试数据
+        </a>
+      </li>
+      <li class="layui-nav-item">
+        <a href="javascript:void(0);" onclick="logout()">
+          退出登录
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+
+        <li class="layui-nav-item layui-this"><a href="manage_advice.html">个性化方案</a></li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a style="color: rgba(255,255,255,.7)!important;;" href="javascript:;">订餐服务</a>
+          <dl class="layui-nav-child">
+            <dd><a href="manage_order_menu.html">菜单</a></dd>
+            <dd><a href="manage_order_pay.html">下单</a></dd>
+            <dd><a href="manage_order_pay_history.html">订单查询</a></dd>
+          </dl>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+  <div style="padding:20px 20px 20px 20px; background-color: #F2F2F2;">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md12">
+      <div class="layui-card">
+        <div class="layui-card-header">运动方案</div>
+        <div id="sport" class="layui-card-body">
+          <p>测试数据</p>
+          <p>测试数据</p>
+        </div>
+      </div>
+    </div>
+    <div class="layui-col-md12">
+      <div class="layui-card">
+        <div class="layui-card-header">食谱推荐</div>
+        <div id="eat" class="layui-card-body">
+          <p>测试数据</p>
+          <img src="" height="200" width="330">
+          <p>测试数据</p>
+          <img src="" height="200" width="330">
+          <p>测试数据</p>
+          <img src="" height="200" width="330">
+          <p>测试数据</p>
+          <img src="" height="200" width="330">
+        </div>
+      </div>
+    </div>
+    
+
+
+  </div>
+</div> 
+  </div>
+
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    © myhealth.com - 智能社区健康管理系统
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script src="js/initialization.js"></script>
+<script>
+  function useritem(){
+      window.location.href="information.html";
+    }
+  $.ajax({
+  url: './php/advice.php',
+  type: 'POST',
+  contentType: false,
+  processData: false,
+  success: function(json){
+    var data=JSON.parse(json);
+    if (data=='') {
+      $('#sport').empty();
+      $('#sport').append("<p>"+"今日无数据"+"</p>");
+      $('#eat').empty();
+      $('#eat').append("<p>"+"今日无数据"+"</p>");
+    }
+    else{
+      $('#sport').empty();
+      $('#sport').append("<p>"+data[0].sport1+"</p>");
+      $('#sport').append("<p>"+data[0].sport2+"</p>");
+      $('#sport').append("<p>"+data[0].sport3+"</p>");
+      $('#sport').append("<p>"+data[0].sport4+"</p>");
+      var eat=[];
+      eat.push(parseInt(data[0].food1));
+      eat.push(data[0].food2);
+      eat.push(data[0].food3);
+      eat.push(data[0].food4);
+      $.ajax({
+        url: './php/menu.php',
+        type: 'POST',
+        contentType: false,
+        processData: false,
+        success: function(json){
+          var data=JSON.parse(json);
+          $('#eat').empty();
+          $.each(data,function(){
+            var id=this.id;
+            var fname=this.fname;
+            var fpicture=this.fpicture;
+            $.each(eat,function(i,val){
+              if (id==val) {
+                $('#eat').append("<p>"+fname+"</p>");
+                $('#eat').append("<img src='"+fpicture+"' height='200' width='330'>");
+              }
+            });
+          });
+        },
+      });
+    }
+  },
+  error: function(){
+    alert("error");
+  }
+  });
+</script>
+</body>
+</html>
